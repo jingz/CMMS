@@ -1,0 +1,85 @@
+= form_for @asset, :html => { :class => "form-horizontal container-fluid", :multipart => true } do |f|
+  .row-fluid
+    %fieldset.span4
+      %legend General Info
+      .control-group
+        = f.label :category_id, nil, { :class => "control-label" }
+        .controls= f.select :category_id, Asset.get_map(:category).map{|m| [m[:val].to_s.camelize, m[:key]] }
+      .control-group.info
+        = f.label :name, nil, { :class => "control-label" }
+        .controls= f.text_field :name, :required => true
+      .control-group
+        = f.label :asset_no, nil, { :class => "control-label" }
+        .controls= f.text_field :asset_no
+      .control-group
+        = f.label :serial_no, nil, { :class => "control-label" }
+        .controls= f.text_field :serial_no
+      .control-group.info
+        = f.label :model, nil, { :class => "control-label" }
+        .controls= f.text_field :model, :required => true
+      .control-group
+        = f.label :power, nil, { :class => "control-label" }
+        .controls= f.text_field :power
+      .control-group
+        = f.label :dimension, nil, { :class => "control-label" }
+        .controls= f.text_field :dimension
+      .control-group
+        = f.label :weight, nil, { :class => "control-label" }
+        .controls= f.number_field :weight
+      .control-group
+        = f.label :priority_id, "Priority", { :class => "control-label" }
+        .controls= f.select :priority_id, Asset.get_map(:priority).map{|m| [m[:val].to_s, m[:key]] }
+      .control-group
+        = f.label :status_id, nil, { :class => "control-label" }
+        .controls= f.select :status_id, Asset.get_map(:status).map{|m| [m[:val].to_s, m[:key]] }
+      .control-group
+        = f.label :remark, nil, { :class => "control-label" }
+        .controls= f.text_area :remark, :size => "70x2"
+      .control-group
+        = f.label :picture, nil, { :class => "control-label" }
+        .controls= f.file_field :picture
+    %fieldset.span4
+      %legend Warranty Info
+      .control-group
+        = f.label :warranty_start_date, nil, { :class => "control-label" }
+        .controls= f.date_select :warranty_start_date
+      .control-group
+        = f.label :warranty_end_date, nil, { :class => "control-label" }
+        .controls= f.date_select :warranty_end_date
+      .control-group
+        = f.label :purchase_date, nil, { :class => "control-label" }
+        .controls= f.date_select :purchase_date
+      .control-group
+        = f.label :start_date, nil, { :class => "control-label" }
+        .controls= f.date_select :start_date
+    %fieldset.span4
+      %legend Cost 
+      .control-group
+        = f.label :original_cost, nil, { :class => "control-label" }
+        .controls= f.number_field :original_cost
+      .control-group
+        = f.label :maint_labor_hours, nil, { :class => "control-label" }
+        .controls= f.number_field :maint_labor_hours
+      .control-group
+        = f.label :maint_labor_cost, nil, { :class => "control-label" }
+        .controls= f.number_field :maint_labor_cost
+      .control-group
+        = f.label :maint_material_cost, nil, { :class => "control-label" }
+        .controls= f.number_field :maint_material_cost
+      .control-group
+        = f.label :maint_cost, nil, { :class => "control-label" }
+        .controls= f.number_field :maint_cost
+      %legend Depreciation
+      .control-group
+        = f.label :depreciation_type, "Type", { :class => "control-label" }
+        .controls= f.select :depreciation_type_id, Asset.get_map(:depreciation_type).map{|m| [m[:val].to_s, m[:key]]}
+      .control-group
+        = f.label :depreciation_start, "Start", { :class => "control-label" }
+        .controls= f.date_select :depreciation_start
+      .control-group
+        = f.label :depreciation_time, "Time", { :class => "control-label" }
+        .controls= f.select :depreciation_time_id, Asset.get_map(:depreciation_time).map{|m| [m[:val].to_s, m[:key]]}
+  .row-fluid
+    .form-actions
+      = f.submit nil, :disable_with => "loading ...", :class => "btn btn-primary" 
+      = link_to "Cancel", assets_path 

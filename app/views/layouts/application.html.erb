@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>CMMS</title>
+  <!-- <%= stylesheet_link_tag :all %> -->
+  <!-- <%= javascript_include_tag :defaults %> -->
+  <%= csrf_meta_tag %>
+  <%= stylesheet_link_tag "/bootstrap/css/bootstrap.css" %>
+  <!-- <%= stylesheet_link_tag "/bootstrap/css/fix.css" %> -->
+  <script src=<%= javascript_path "jquery-1.8.3.min.js" %> ></script>
+  <script src=<%= javascript_path "/bootstrap/js/bootstrap.min.js" %> ></script>
+  <%= javascript_include_tag "jquery-rails" %>
+</head>
+<body>
+      <div class="navbar navbar-static-top navbar-inverse">
+        <div class="navbar-inner navbar-inverse">
+            <ul class='nav nav-pills'>
+                  <li>
+                    <%= link_to "Dashboard", "/home" %>
+                  </li>
+                  <li>
+                    <%= link_to "Workorder", workorders_path %>
+                  </li>
+                  <li>
+                    <%= link_to "Asset", assets_path %>
+                  </li>
+                  <li>
+                    <%= link_to "Inventory", inventories_path %>
+                  </li>
+                  <li>
+                    <%= link_to "User", users_path %>
+                  </li>
+                  <!--
+                  <li class="active dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Management <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                          <li><a href="#">Machine</a></li>
+                          <li><a href="#">Users</a></li>
+                      </ul>
+                  </li>
+                  -->
+              </ul>
+              <ul class="nav pull-right">
+                 <% if current_user %>
+                  <li class="muted">
+                      <a><%= current_user.fullname %></a>
+                  <li>
+                  <li>
+                     <%= link_to "Log Out", destroy_user_session_path, :method => :delete %>
+                 </li>
+               <% end %>
+              </ul>
+          </div>
+        </div>
+    <div class="container-fluid">
+       <% if alert %>
+        <p class="alert alert-error"><%= alert %></p>
+       <% end %>
+       <% if notice %>
+        <p class="alert alert-info"><%= notice %></p>
+       <% end %>
+<%= yield %>
+    </div>
+</body>
+</html>

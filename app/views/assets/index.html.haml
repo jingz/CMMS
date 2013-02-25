@@ -1,0 +1,65 @@
+.view-wrapper
+  %h1 Asset List
+  = link_to "New", new_asset_path, :class => "btn btn-primary"
+  %table.table.table-striped.table-condensed
+    %thead
+      %tr
+        %th #
+        %th Asset No
+        %th Status
+        %th Priority
+        %th Parent
+        %th Type
+        %th Template
+        %th Category
+        %th Location
+        %th Weight
+        %th Weight UOM
+        %th Serial NO
+        %th Owner User
+        %th Start Date
+        %th Purchase Date
+        %th Original Cost
+        %th Manufacturer
+        %th Vendor
+        %th Action
+    %tbody
+      - @assets.each do |a|
+        %tr
+          %td= a.id
+          %td= a.asset_no
+          %td= render "status", :asset => a
+          %td= a.priority_val
+          %td= a.type_id
+          %td= a.parent_id
+          %td= a.template_id
+          %td= a.category_val
+          %td= a.location_id
+          %td= a.weight
+          %td= a.weight_uom_id
+          %td= a.remark
+          %td= a.serial_no
+          %td= a.owner_user_id
+          %td= a.start_date
+          %td= a.purchase_date
+          %td= a.original_cost
+          %td= a.manufacturer_id
+          %td= a.vendor_id
+          / %td= a.warranty_start_date
+          / %td= a.warranty_end_date
+          %td
+            = link_to "edit", edit_asset_path(a)
+            = link_to "show", asset_path(a)
+            = link_to "delete", asset_path(a), :method => :delete, 
+                                                 :confirm => "Sure ?", 
+                                                 :remote => true,
+                                                 :class => "del-machine",
+                                                 "data-type" => "json"
+  = will_paginate @assets, :renderer => WillPaginate::ActionView::BootstrapLinkRenderer
+            
+:javascript
+  $(".del-machine").bind("ajax:success", function(ev, res){
+    if(res.success){
+      $(this).parents("tr").fadeOut();
+    }
+  });

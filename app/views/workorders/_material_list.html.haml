@@ -1,0 +1,33 @@
+%fieldset#parts
+	%legend
+		Adding Used Part
+		%button.btn.btn-mini.btn-primary#btn-add-part
+			%i.icon-plus
+
+%script#part-temp{ :type => "text/html" }
+	= fields_for "workorder[parts_attributes][]", @workorder.parts.new do |p|
+		.control-group
+			.controls.form-inline
+				%label Part
+				= p.select :inventory_id, Inventory.all.map{|i|[ "#{i.in_type.name} (#{i.qty_in_stock})" , i.id]}
+				= p.number_field :qty_used, { :class => "input-small", :value => 1 }
+				.button.btn.btn-mini.btn-danger.btn-remove-part
+					%i.icon-remove
+
+:javascript
+	$(document).ready(function(){
+
+		$("#btn-add-part").click(function(){
+			var h = $("#part-temp").html();
+			$("#parts").append(h);
+			return false;
+		});
+
+		$(".btn-remove-part").live("click", function(){
+			if(confirm("Are you sure ?")){
+				$(this).parents(".control-group").remove();
+			}
+			return false;
+		});
+
+	});

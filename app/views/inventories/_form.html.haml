@@ -1,0 +1,29 @@
+= form_for @inventory, :html => { :class => "form-horizontal container-fluid", :multipart => true } do |f|
+  .row-fluid
+    %fieldset
+      %legend General Info
+      .control-group
+        = f.label :type_id, nil, { :class => "control-label" }
+        .controls= f.select :type_id, InvType.all.map{|x| [x.name, x.id]}
+      .control-group
+        = f.label :category_id, nil, { :class => "control-label" }
+        .controls= f.select :category_id, Inventory.list_ref_const(:category)
+      .control-group.warning
+        = f.label :description, nil, { :class => "control-label" }
+        .controls= f.text_area :description, :rows => 3
+      .control-group
+        = f.label :stock_type_id, nil, { :class => "control-label" }
+        .controls= f.select :stock_type_id, Inventory.list_ref_const(:stock_type)
+      .control-group.warning
+        = f.label :avg_unit_cost, nil, { :class => "control-label" }
+        .controls= f.number_field :avg_unit_cost, :required => true
+      .control-group.warning
+        = f.label :qty_in_stock, nil, { :class => "control-label" }
+        .controls= f.number_field :qty_in_stock, :required => true
+      .control-group.warning
+        = f.label :reorder_qty, nil, { :class => "control-label" }
+        .controls= f.number_field :reorder_qty
+  .row-fluid
+    .form-actions
+      = f.submit nil, :disable_with => "loading ...", :class => "btn btn-primary" 
+      = link_to "Cancel", inventories_path 

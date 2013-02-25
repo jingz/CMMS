@@ -1,0 +1,22 @@
+.view-wrapper
+  %h1 Maintenance Form Request
+  = link_to "New", new_maintenance_request_form_path, :class => "btn btn-primary"
+  %table.table.table-striped.table-condensed
+    %thead
+      %tr
+        %th #
+        %th Ref No
+        %th Status
+        %th Machine
+        %th Responder
+        %th Created At
+    %tbody
+    - @req_forms.each do |m|
+      %tr
+        %td= m.id
+        %td= m.id
+        %td= m.status
+        %td= link_to m.machine.ref_no, machine_path(m.machine_id)
+        %td= m.response_user.fullname
+        %td= time_ago_in_words m.created_at
+       

@@ -1,0 +1,39 @@
+%fieldset
+	%legend General Info
+	.control-group
+		= f.label :wo_type_id, nil, { :class => "control-label" }
+		.controls= f.select :wo_type_id, 
+												Workorder.get_map(:wo_type).map{|m| [m[:val].to_s.split("_").map(&:camelize).join(" "), m[:key]] }, 
+												{},
+												{ :disabled => "disabled" }
+	.control-group
+		= f.label :priority_id, nil, { :class => "control-label" }
+		.controls= f.select :priority_id, 
+			Workorder.get_map(:priority).map{|m| [m[:val].to_s.split("_").map(&:camelize).join(" "), m[:key]] },
+			{}, { :disabled => "disabled" }
+
+	.control-group
+		= f.label :asset_id, "Asset", { :class => "control-label" }
+		.controls= f.select :asset_id, 
+							Asset.all.map{|a| [a.name, a.id] },
+							{}, { :disabled => "disabled" }
+	.control-group.info
+		= f.label :description, nil, { :class => "control-label" }
+		.controls= f.text_area :description, { :rows => 3, :class => "input-xxlarge", :disabled => "disabled" }
+	.control-group.warning
+		= f.label :asset_note, nil, { :class => "control-label" }
+		.controls= f.text_area :asset_note, { :rows => 3, :class => "input-xxlarge", :disabled => false }
+	.control-group
+		= f.label :assigned_to_id, nil, { :class => "control-label" }
+		.controls= f.select :assigned_to_id, 
+							User.all.map{|u| [u.fullname, u.id] }, 
+							{}, { :disabled => "disabled" } # TODO user
+	.control-group
+		= f.label :time_needed, nil, { :class => "control-label" }
+		.controls= f.text_field :time_needed, { :disabled => true }
+	.control-group
+		= f.label :workflow_state, "State", { :class => "control-label" }
+		.controls= f.text_field :workflow_state, { :disabled => true }
+	.control-group
+		= f.label :workflow_action, "Prev Action", { :class => "control-label" }
+		.controls= f.text_field :workflow_action, { :disabled => true }

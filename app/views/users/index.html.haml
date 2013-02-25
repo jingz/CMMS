@@ -1,0 +1,20 @@
+.view-wrapper
+  %h1 User List
+  - if can? :create, @users
+    = link_to "New", new_user_path, :class => "btn btn-primary"
+  %table.table.table-striped.table-condensed
+    %thead
+      %tr
+        %th #
+        %th email
+        %th Name
+        %th Roles
+        %th Created At
+    %tbody
+    - @users.each do |m|
+      %tr
+        %td= m.id
+        %td= m.email
+        %td= m.fullname
+        %td= m.roles.map(&:name).join(",")
+        %td= time_ago_in_words m.created_at

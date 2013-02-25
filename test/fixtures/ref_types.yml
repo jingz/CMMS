@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  description: MyString
+  ref_typeable_id: 1
+  ref_typeable_type: 
+
+two:
+  name: MyString
+  description: MyString
+  ref_typeable_id: 1
+  ref_typeable_type: 

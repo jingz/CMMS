@@ -1,0 +1,22 @@
+= form_for @maintenance_request_form, :html => { :class => "form-horizontal" } do |f|
+  %fieldset
+    %legend Maintenance Request Form
+    .control-group
+      = f.label :machine_id, "Machine", { :class => "control-label" }
+      .controls= f.select :machine_id, @machines.map{|m| [m.name, m.id]}
+    .control-group.info
+      = f.label :ref_type_id, "Ref Type", { :class => "control-label" }
+      .controls= f.select :ref_type_id, @ref_types.map{|m| [m.name, m.id]}
+    .control-group.info
+      = f.label :pre_info, nil, { :class => "control-label" }
+      .controls= f.text_area :pre_info, { :required => true, :rows => 2 }
+    .control-group
+      = f.label :analytic, nil, { :class => "control-label" }
+      .controls= f.text_area :analytic, { :rows => 2 }
+    .control-group
+      = f.label :response_user_id, "Staff", { :class => "control-label" }
+      .controls= f.select :response_user_id, @users.map {|m| [m.fullname, m.id] }
+    .form-actions
+      = f.submit nil, :disable_with => "loading ...", :class => "btn btn-primary" 
+      = link_to "Cancel", maintenance_request_forms_path 
+

@@ -1,0 +1,18 @@
+.form-vertical .form-horizontal .control-group > label {
+  text-align: left;
+}
+.form-horizontal .form-vertical .control-group > label {
+  float: none;
+  padding-top: 0;
+  text-align: left;
+}
+.form-horizontal .form-vertical .controls {
+  margin-left: 0;
+}
+.form-horizontal .form-vertical.form-actions,
+.form-horizontal .form-vertical .form-actions {
+  padding-left: 20px;
+}
+.control-group .control-group {
+  margin-bottom: 0;
+}

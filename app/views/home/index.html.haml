@@ -1,0 +1,32 @@
+.container-fluid
+  .span16
+    - if @workorders.count > 0
+      %feldset
+        %legend= "#{@workorders.count} work requests."
+        %table.table.table-striped.table-condensed
+          %thead
+            %tr
+              %th WO No
+              %th WO Type
+              %th State
+              %th Detail
+              %th Asset
+              %th Owner User
+              %th Respond User
+              %th Due Date
+              %th Action
+          %tbody
+            - @workorders.each do |t|
+              %tr
+                %td= t.wo_no
+                %td= t.wo_type_val
+                %td= t.workflow_state.to_s.humanize
+                %td= t.description
+                %td= Asset.find(t.asset_id).asset_no # TODO System Config
+                %td= User.find(t.assigned_by_id).fullname
+                %td= User.find(t.assigned_to_id).fullname
+                %td= t.time_needed
+                / - if t.assigned_by_id == current_user.id
+                /   %td= link_to "Monitor"
+                - if t.assigned_to_id == current_user.id
+                  %td= link_to "Take Action", edit_workorder_path(t, { :next_action => true } )

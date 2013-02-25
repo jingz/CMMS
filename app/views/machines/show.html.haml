@@ -1,0 +1,44 @@
+.view-wrapper
+  %fieldset
+    %legend 
+      Machine Info
+    .span3= image_tag @machine.picture.url(:medium), :class => "img-rounded"
+    .span10
+      %dl.dl-horizontal
+        %dt Status
+        %dd= render "status", :machine => @machine
+      %dl.dl-horizontal
+        %dt Ref No
+        %dd= @machine.ref_no
+      %dl.dl-horizontal
+        %dt Machine Type
+        %dd= @machine.ref_machine_type.name
+      %dl.dl-horizontal
+        %dt Name
+        %dd= @machine.name
+      %dl.dl-horizontal
+        %dt Model
+        %dd= @machine.model
+      %dl.dl-horizontal
+        %dt Power
+        %dd= @machine.power
+      %dl.dl-horizontal
+        %dt Dimension
+        %dd= @machine.dimension
+      %dl.dl-horizontal
+        %dt Supplier Company
+        %dd= @machine.supplier_company
+      %dl.dl-horizontal
+        %dt Acquired Date
+        %dd= @machine.acquired_date
+      %dl.dl-horizontal
+        %dt Disposed Date
+        %dd= @machine.disposed_date
+      %dl.dl-horizontal
+        %dt Remark 
+        %dd= @machine.remark
+      %dl.dl-horizontal
+        %dt
+        %dd= link_to "← back to list", machines_path
+
+

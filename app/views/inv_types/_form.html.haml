@@ -1,0 +1,14 @@
+= form_for @inv_type, :html => { :class => "form-horizontal container-fluid", :multipart => true } do |f|
+  .row-fluid
+    %fieldset
+      %legend General Info
+      .control-group
+        = f.label :name, "Type Name", { :class => "control-label" }
+        .controls= f.text_field :name, :required => true
+      .control-group
+        = f.label :note, nil, { :class => "control-label" }
+        .controls= f.text_area :note, :rows => 3
+  .row-fluid
+    .form-actions
+      = f.submit nil, :disable_with => "loading ...", :class => "btn btn-primary" 
+      = link_to "Cancel", inv_types_path 

@@ -1,0 +1,13 @@
+.view-wrapper
+  %fieldset
+    %legend Inventory Type
+    %dl.dl-horizontal
+      %dt Type
+      %dd= @inv_type.name
+    %dl.dl-horizontal
+      %dt Note
+      %dd= @inv_type.note
+    %dl.dl-horizontal
+      %dt
+      %dd= link_to "←  inv_type List", inv_types_path
+

@@ -1,0 +1,22 @@
+= form_for @user, :html => { :class => "form-horizontal" } do |f|
+  %fieldset
+    %legend User Form
+    .control-group
+      = f.label :email, nil, { :class => "control-label" }
+      .controls= f.text_field :email, :required => true
+    .control-group.info
+      = f.label :firstname, nil, { :class => "control-label" }
+      .controls= f.text_field :firstname, :required => true
+    .control-group.info
+      = f.label :lastname, nil, { :class => "control-label" }
+      .controls= f.text_field :lastname, :required => true
+    .control-group.info
+      = f.label :password, nil, { :class => "control-label" }
+      .controls= f.password_field :password, :required => true
+    .control-group
+      = f.label :password_confirmation, nil, { :class => "control-label" }
+      .controls= f.password_field :password_confirmation, :required => true
+    .form-actions
+      = f.submit nil, :disable_with => "loading ...", :class => "btn btn-primary" 
+      = link_to "Cancel", "/users" 
+

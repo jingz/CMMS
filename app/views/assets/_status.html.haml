@@ -1,0 +1,7 @@
+- if asset.status_val == :in_service
+  %span.label.label-success= asset.status_val
+- elsif asset.status_val == :in_repaire
+  %span.label.label-warning= asset.status_val
+- elsif asset.status_val == :scrapped
+  %span.label.label-important= asset.status_val
+

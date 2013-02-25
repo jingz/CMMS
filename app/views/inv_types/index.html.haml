@@ -1,0 +1,40 @@
+.view-wrapper
+  %h1 Inventory Type List
+  = link_to "New", new_inv_type_path, :class => "btn btn-primary"
+  %table.table.table-striped.table-condensed
+    %thead
+      %tr
+        %th #
+        %th Type Name
+        %th Note
+        %th Updated By
+        %th Created By
+        %th Updated At
+        %th Created At 
+    %tbody
+      - @inv_types.each do |a|
+        %tr
+          %td= a.id
+          %td= a.name
+          %td= a.note
+          %td= render "shared/user_by_id" , :id => a.updated_id
+          %td= render "shared/user_by_id" , :id => a.created_id
+          %td= a.updated_at
+          %td= a.created_at
+          %td
+            = link_to "edit", edit_inv_type_path(a)
+            = link_to "show", inv_type_path(a)
+            / = link_to "delete", inv_type_path(a), :method => :delete, 
+            /                                        :confirm => "Sure ?", 
+            /                                        :remote => true,
+            /                                        :class => "del-machine",
+            /                                        "data-type" => "json"
+  = will_paginate @inv_types, :renderer => WillPaginate::ActionView::BootstrapLinkRenderer
+            
+:javascript
+$(".del-machine").bind("ajax:success", function(ev, res){
+  if(res.success){
+    $(this).parents("tr").fadeOut();
+  }
+});
+

@@ -1,0 +1,12 @@
+%fieldset
+	%legend Update Workorder
+	.control-group
+		= f.label :workflow_action, "Next Action", { :class => "control-label" }
+		.controls= f.select :workflow_action, @workorder.current_state.events.keys.map{|e| [e.to_s.humanize, e]}
+	= fields_for "state_logs", @workorder.state_logs.new do |sl|
+		/ = sl.hidden_field :workorder_id
+		/ = sl.hidden_field :changed_by_id, :value => current_user.id
+		/ = sl.hidden_field :from_wf_state, :value => @workorder.current_state.to_s
+		.control-group
+			= sl.label :comment, nil, { :class => "control-label" }
+			.controls= sl.text_area :comment, :rows => 3

@@ -1,0 +1,50 @@
+.view-wrapper
+  %h1 Machines List
+  = link_to "New", new_machine_path, :class => "btn btn-primary"
+  %table.table.table-striped.table-condensed
+    %thead
+      %tr
+        %th #
+        %th Status
+        %th Ref No
+        %th Machine Type
+        %th Name
+        %th Model
+        %th Power
+        %th Dimension
+        %th Supplier Company
+        %th Acquired Date
+        %th Disposed Date
+        %th Remark
+        %th Action
+    %tbody
+      - @machines.each do |m|
+        %tr
+          %td= m.id
+          %td= render "status", :machine => m
+          %td= m.ref_no
+          %td= m.ref_machine_type.name
+          %td= m.name
+          %td= m.model
+          %td= m.power
+          %td= m.dimension
+          %td= m.supplier_company
+          %td= m.acquired_date
+          %td= m.disposed_date
+          %td= m.remark
+          %td
+            = link_to "edit", edit_machine_path(m)
+            = link_to "show", machine_path(m)
+            = link_to "delete", machine_path(m), :method => :delete, 
+                                                 :confirm => "Sure ?", 
+                                                 :remote => true,
+                                                 :class => "del-machine",
+                                                 "data-type" => "json"
+  = will_paginate @machines, :renderer => WillPaginate::ActionView::BootstrapLinkRenderer
+            
+:javascript
+  $(".del-machine").bind("ajax:success", function(ev, res){
+    if(res.success){
+      $(this).parents("tr").fadeOut();
+    }
+  });

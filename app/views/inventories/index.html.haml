@@ -1,0 +1,42 @@
+.view-wrapper
+  %h1 Inventory List
+  = link_to "New", new_inventory_path, :class => "btn btn-primary"
+  %table.table.table-striped.table-condensed
+    %thead
+      %tr
+        %th #
+        %th inventory No
+        %th Type
+        %th Category
+        %th Description
+        %th Stock Type
+        %th QTY In Stock
+        %th Reorder QTY
+    %tbody
+      - @inventories.each do |a|
+        %tr
+          %td= a.id
+          %td= a.inv_no
+          %td= InvType.find(a.type_id).name
+          %td= a.category_val
+          %td= a.description
+          %td= a.stock_type_val
+          %td= a.qty_in_stock
+          %td= a.reorder_qty
+          %td
+            = link_to "edit", edit_inventory_path(a)
+            = link_to "show", inventory_path(a)
+            = link_to "delete", inventory_path(a), :method => :delete, 
+                                                   :confirm => "Sure ?", 
+                                                   :remote => true,
+                                                   :class => "del-machine",
+                                                   "data-type" => "json"
+  = will_paginate @inventories, :renderer => WillPaginate::ActionView::BootstrapLinkRenderer
+            
+:javascript
+  $(".del-machine").bind("ajax:success", function(ev, res){
+    if(res.success){
+      $(this).parents("tr").fadeOut();
+    }
+  });
+

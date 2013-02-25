@@ -1,0 +1,11 @@
+.view-wrapper
+	%h1= @workorder.workflow_state.to_s.humanize
+	= form_for @workorder, :html => { :class => "form-horizontal container-fluid", :multipart => true } do |f|
+		.row-fluid
+			= render "state_info", :f => f
+			= render "next_action", :f => f
+			= render "material_list", :f => f
+		.row-fluid
+			.form-actions
+				= f.submit "Submit Action", :disable_with => "loading ...", :class => "btn btn-primary" 
+				= link_to "Cancel", :back 

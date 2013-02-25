@@ -1,0 +1,37 @@
+.view-wrapper
+  %fieldset
+    %legend 
+      Asset Info
+    .span3= image_tag @asset.picture.url(:medium), :class => "img-rounded"
+    .span10
+      %dl.dl-horizontal
+        %dt Asset No
+        %dd= @asset.asset_no
+      %dl.dl-horizontal
+        %dt Asset Type
+        %dd= @asset.type_id
+      %dl.dl-horizontal
+        %dt Name
+        %dd= @asset.name
+      %dl.dl-horizontal
+        %dt Model
+        %dd= @asset.model
+      %dl.dl-horizontal
+        %dt Power
+        %dd= @asset.power
+      %dl.dl-horizontal
+        %dt Dimension
+        %dd= @asset.dimension
+      %dl.dl-horizontal
+        %dt Purchase Date
+        %dd= @asset.purchase_date
+      %dl.dl-horizontal
+        %dt Start Date
+        %dd= @asset.start_date
+      %dl.dl-horizontal
+        %dt Remark 
+        %dd= @asset.remark
+      %dl.dl-horizontal
+        %dt
+        %dd= link_to "←  Asset List", assets_path
+
