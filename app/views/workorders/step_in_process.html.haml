@@ -3,7 +3,7 @@
 	= form_for @workorder, :html => { :class => "form-horizontal container-fluid", :multipart => true } do |f|
 		.row-fluid
 			= render "state_info", :f => f
-			.span5
+			.span4
 				= render "next_action", :f => f
 			.span5
 				= render "material_list", :f => f

@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
   def initialize(user)
     user ||= Use.new 
-    if user.role? :manager
+    if user.role? :manager or user.role? :admin
       can :manage, :all
     elsif user.role? :staff
       cannot :manage, User

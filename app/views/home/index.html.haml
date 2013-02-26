@@ -30,3 +30,7 @@
                 /   %td= link_to "Monitor"
                 - if t.assigned_to_id == current_user.id
                   %td= link_to "Take Action", edit_workorder_path(t, { :next_action => true } )
+    - else
+      %feldset
+        %legend= "You have no work request."
+
