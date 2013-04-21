@@ -1,0 +1,16 @@
+%fieldset
+  %legend Parts Used
+  - if wo.parts.count > 0
+    - wo.parts.reverse.each do |part|
+      %h5
+        %span= part.updated_at.to_formatted_s(:long)
+        %strong.muted Updated By:
+        %em= User.find(part.updated_id).fullname
+      %dd
+        %span.muted Type
+        %i= part.inventory.in_type.name
+      %dd
+        %span.muted Qty Used:
+        %i= part.qty_used
+  - else
+    %h5.ctext.well Empty

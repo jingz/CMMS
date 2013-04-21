@@ -1,7 +1,10 @@
 class Inventory < ActiveRecord::Base
 	belongs_to :in_type, :class_name => "InvType",
-								    :foreign_key => "type_id"	
-
+    								   :foreign_key => "type_id"	
+  belongs_to :updated_by, :class_name => "User",
+  											  :foreign_key => :updated_id
+  belongs_to :created_by, :class_name => "User",
+  											  :foreign_key => :created_id
 	REF_MAP = {
 		:category => [
 			{ :key => 1, :val => :part },

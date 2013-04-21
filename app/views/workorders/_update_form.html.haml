@@ -1,0 +1,17 @@
+= form_for wo, :html => { :class => "form-horizontal container-fluid" } do |f|
+  %fieldset
+    %legend Update Form
+    .control-group
+      = f.label :workflow_action, "Next Action", { :class => "control-label" }
+      .controls= f.select :workflow_action, wo.current_state.events.keys.map{|e| [e.to_s.humanize, e]}
+    .control-group
+      = f.label :assigned_to_id, 'Assigned To', { :class => "control-label" }
+      .controls= f.select :assigned_to_id, User.all.map{|u| [u.fullname, u.id]}
+    = fields_for "state_logs", wo.state_logs.new do |sl|
+      .control-group
+        = sl.label :comment, 'Note', { :class => "control-label" }
+        .controls= sl.text_area :comment, :rows => 3
+    = render 'material_list'
+    .form-actions
+      = f.submit nil, :disable_with => "loading ...", :class => "btn btn-primary" 
+      = link_to "Cancel", workorders_path 

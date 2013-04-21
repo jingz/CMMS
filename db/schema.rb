@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130225065054) do
+ActiveRecord::Schema.define(:version => 20130415101022) do
 
   create_table "asset_types", :force => true do |t|
     t.string   "type"
@@ -210,6 +210,22 @@ ActiveRecord::Schema.define(:version => 20130225065054) do
     t.datetime "updated_at"
   end
 
+  create_table "permissions", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "created_by"
+    t.string   "updated_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "permissions_users", :id => false, :force => true do |t|
+    t.integer  "permission_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pms", :force => true do |t|
     t.string   "pm_no"
     t.text     "description"
@@ -317,12 +333,36 @@ ActiveRecord::Schema.define(:version => 20130225065054) do
     t.string   "last_sign_in_ip"
     t.string   "firstname"
     t.string   "lastname"
+    t.string   "emp_no"
+    t.string   "note"
+    t.string   "job_title"
+    t.integer  "team_id"
+    t.integer  "supervisor_id"
+    t.integer  "dept_id"
+    t.integer  "costcode_id"
+    t.integer  "req_approval_id"
+    t.integer  "po_approval_id"
+    t.integer  "craft_id"
+    t.string   "phone_work"
+    t.string   "phone_mobile"
+    t.string   "email_other"
+    t.date     "start_work_date"
+    t.text     "address"
+    t.string   "education_level_id"
+    t.string   "id_no"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "users_permissions", :id => false, :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "permission_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "vendors", :force => true do |t|
     t.string   "name",       :null => false

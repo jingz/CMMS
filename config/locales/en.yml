@@ -3,3 +3,11 @@
 
 en:
   hello: "Hello world"
+  user:
+    firstname: "First Name"
+    lastname: "Last Name"
+    phone_mobile: "Mobile"
+    start_work_date: "Start Work Date"
+    address: "Address"
+    id_no: "ID no"
+    education_level: "Education"

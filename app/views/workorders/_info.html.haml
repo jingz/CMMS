@@ -1,0 +1,44 @@
+%fieldset
+	%legend Info
+	.row-fluid
+		.span8
+			.span2.rtext
+				%b WO Type:
+			.span2
+				%span= wo.wo_type_val
+			.span2.rtext
+				%b Status:
+			.span2
+				%span= wo.workflow_state
+	.row-fluid
+		.span8
+			.span2.rtext
+				%b Priority:
+			.span2
+				%span= wo.priority_val
+			.span2.rtext
+				%b Assigned To:
+			.span2
+				- if wo.assigned_to_id
+					%span= User.find(wo.assigned_to_id).fullname
+	.row-fluid
+		.span8
+			.span2.rtext
+				%b Description
+			.span2= wo.description
+	.row-fluid
+		.span8
+			.span2.rtext
+				%b Asset:
+			.span2
+				%span= wo.asset.asset_no
+	.row-fluid
+		.span8
+			.span2.rtext
+				%b Asset Note:
+			.span2= wo.asset_note
+	.row-fluid
+		.span8
+			.span2.rtext
+				%b Create Date:
+			.span3= wo.created_at.to_formatted_s :long

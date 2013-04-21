@@ -1,4 +1,8 @@
 class InventoriesController < ApplicationController
+  load_and_authorize_resource
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to :back, :alert => exception.message
+  end
   # GET /inventories
   # GET /inventories.xml
   def index

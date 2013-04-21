@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @users = User.all
+    @users = User.order('created_at asc').all
     authorize! :read, @users
 
     respond_to do |format|

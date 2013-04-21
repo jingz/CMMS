@@ -1,4 +1,9 @@
 class WorkordersController < ApplicationController
+  load_and_authorize_resource
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to :back, :alert => exception.message
+  end
+
   # GET /workorders
   # GET /workorders.xml
   def index
@@ -36,7 +41,12 @@ class WorkordersController < ApplicationController
   def edit
     @workorder = Workorder.find(params[:id])
     # next action ?
-    if params[:next_action] and @workorder.assigned_to_id == current_user.id
+    if params[:next_action] and @workorder.current_state.to_s == "request"
+      render "step_#{@workorder.current_state}"
+      return
+    end
+
+    if params[:next_action] # and @workorder.assigned_to_id == current_user.id
       render "step_#{@workorder.current_state}"
       return
     end
@@ -46,9 +56,11 @@ class WorkordersController < ApplicationController
   # POST /workorders.xml
   def create
     @workorder = Workorder.new(params[:workorder])
-    @workorder.assigned_by_id = current_user.id
     @workorder.updated_id = current_user.id
     @workorder.created_id = current_user.id
+    @workorder.workflow_state = "request"
+    # requested by
+    @workorder.assigned_by_id = current_user.id 
 
     respond_to do |format|
       if @workorder.save
@@ -71,8 +83,8 @@ class WorkordersController < ApplicationController
     updated = false
 
     Workorder.transaction do
-      if params[:parts_attributes]
-        params[:parts_attributes].each do |s|
+      if params[:workorder][:parts_attributes]
+        params[:workorder][:parts_attributes].each do |s|
           s[:updated_id] = uid
           s[:created_id] = uid
         end
@@ -85,7 +97,6 @@ class WorkordersController < ApplicationController
       if params[:state_logs]
         @workorder.state_logs.last.update_attributes! params[:state_logs]
       end
-
 
       updated = true
     end

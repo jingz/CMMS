@@ -1,0 +1,31 @@
+.view-wrapper
+	%fieldset
+		%legend Inventory Info
+		%dl.dl-horizontal
+			%dt Inventory No
+			%dd= @inventory.inv_no
+		%dl.dl-horizontal
+			%dt Type
+			%dd= @inventory.in_type.name
+		%dl.dl-horizontal
+			%dt Category
+			%dd= @inventory.category_val
+		%dl.dl-horizontal
+			%dt Stock Type
+			%dd= @inventory.stock_type_val
+		%dl.dl-horizontal
+			%dt Avg Unit Cost
+			%dd= @inventory.avg_unit_cost
+		%dl.dl-horizontal
+			%dt Qty On Order
+			%dd= @inventory.qty_on_order
+		%dl.dl-horizontal
+			%dt Qty To Order
+			%dd= @inventory.qty_to_order
+		%dl.dl-horizontal
+			%dt Reorder Qty
+			%dd= @inventory.reorder_qty
+		/ %dl.dl-horizontal
+		/ 	%dt Updated By
+		/ 	%dd= @inventory.updated_by.fullname
+

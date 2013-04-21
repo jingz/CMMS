@@ -27,6 +27,10 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :phone_work
       t.string :phone_mobile
       t.string :email_other
+      t.date :start_work_date
+      t.text :address
+      t.string :education_level_id # education_level_id
+      t.string :id_no # ID Card
 
       # t.integer :im1_type_id # im_type
       # t.string :im1_id
@@ -40,7 +44,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.string :state
       # t.string :zip
       # t.string :country
-                  
       
       t.timestamps
     end

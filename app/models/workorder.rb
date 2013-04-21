@@ -1,5 +1,5 @@
 class Workorder < ActiveRecord::Base
-  belongs_to :assets
+  belongs_to :asset
   belongs_to :pm
   belongs_to :assigned_by, :class_name => "User",
                            :foreign_key => "assigned_by_id"
@@ -22,7 +22,7 @@ class Workorder < ActiveRecord::Base
       { :key => 5, :val => :detective }
     ],
     :status => [
-      { :key => 1, :val => :new },
+      { :key => 1, :val => :request },
       { :key => 2, :val => :open },
       { :key => 3, :val => :wait_for_material },
       { :key => 4, :val => :in_progress },
@@ -71,17 +71,24 @@ class Workorder < ActiveRecord::Base
       { :key => 12, :val => :other },
     ]
   }
+
   include RefConst
   include Workflow
 
+  # work request flow
   workflow do
-    state :new do
-      event :start, :transitions_to => :awaiting_report
+    state :request do
+      event :approve_request, :transitions_to => :awaiting_report
     end
 
     state :awaiting_report do
       event :wait_for_material, :transitions_to => :awaiting_for_material
+      event :wait_for_contract, :transitions_to => :awaiting_for_contract
       event :in_process, :transitions_to => :in_process
+    end
+
+    state :awaiting_for_contract do
+      event :get_contract, :transitions_to => :in_process
     end
 
     state :awaiting_for_material do
@@ -105,16 +112,42 @@ class Workorder < ActiveRecord::Base
 
   # scopes ---------------------------------------------
 
-  scope :my_tasks, lambda{ |user| where(" (assigned_to_id = ? or assigned_by_id = ?) and workflow_state not in (?)", user.id, user.id, [:accepted, :rejected]) }
+  scope :my_tasks, lambda{ |user| 
+                      if user.role? :manager
+                        # manager can assign to anyone
+                        where(%Q{ 
+                          (assigned_to_id = ? or assigned_by_id = ?) 
+                          AND 
+                          ( workflow_state not in (?) ) 
+                          OR
+                          ( workflow_state = 'request' )
+                          OR
+                          ( workflow_state = 'awaiting_completed' and assigned_by_id = ? )
+                        }, user.id, user.id, [:accepted, :rejected], user.id) 
+                      else
+                        where(%Q{ 
+                          (assigned_to_id = ? or assigned_by_id = ?) 
+                          AND 
+                          ( workflow_state not in (?) ) 
+                        }, user.id, user.id, [:accepted, :rejected])
+
+                      end
+                    }
   # ---------------------------------------------------------
 
   self.per_page = 20
   # callbacks -------------------------
   
   before_create :add_default
-  after_create :start_the_wf
+  # after_create :start_the_wf
+  # after_update :set_responder_for_complete, :if => lambda { workflow_state == :awaiting_completed }
   after_update :reopen_wo, :if => lambda { workflow_state.to_sym == :rejected }
   # before_update :trigger_workflow, :if => :workflow_action_changed?
+
+  # def set_responder_for_complete
+  #   # set to the person who approve request 
+  #   assigned_to_id =  
+  # end
 
   def start_the_wf
     self.workflow_action = "start"
@@ -126,7 +159,7 @@ class Workorder < ActiveRecord::Base
     c.rework_wo_id = self.id
     # reset attributes
     c.wo_no = nil 
-    c.workflow_state = "new"
+    c.workflow_state = "request"
     c.workflow_action = nil
     c.updated_id = self.updated_id
     c.created_id  = self.created_id
@@ -169,7 +202,6 @@ class Workorder < ActiveRecord::Base
   end
 
   # --------------------------------------------------------
-
   def gen_wo_no
     now = Time.now.to_date
     prefix = wo_type_val.to_s[0..1].upcase + wo_type_id.to_s.rjust(2,"0")
@@ -188,6 +220,11 @@ class Workorder < ActiveRecord::Base
   def add_default
     self.wo_no = self.gen_wo_no
     self.resolution_id = Workorder.get_ref_key(:resolution, :open)
-    self.assigned_time = Time.now
+    # self.assigned_time = Time.now
+  end
+
+  def complete?
+    self.workflow_state == "rejected" or
+    self.workflow_state == "accepted"
   end
 end

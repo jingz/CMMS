@@ -10,6 +10,7 @@
         %th Name
         %th Roles
         %th Created At
+        %th Actions
     %tbody
     - @users.each do |m|
       %tr
@@ -18,3 +19,24 @@
         %td= m.fullname
         %td= m.roles.map(&:name).join(",")
         %td= time_ago_in_words m.created_at
+        %td= time_ago_in_words m.created_at
+        %td
+          = link_to "edit", edit_user_path(m)
+          = "|"
+          = link_to "change password", edit_user_password_path(m)
+          = "|"
+          = link_to "show", user_path(m)
+          = "|"
+          = link_to "delete", user_path(m), :method => :delete, 
+                                            :confirm => "Sure ?", 
+                                            :remote => true,
+                                            :class => "del-machine",
+                                            "data-type" => "json"
+                                            
+:javascript
+  $(".del-machine").bind("ajax:success", function(ev, res){
+    console.log(res);
+    if(res.success){
+      $(this).parents("tr").fadeOut();
+    }
+  });

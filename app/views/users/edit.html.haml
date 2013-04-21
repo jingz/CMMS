@@ -1,0 +1,36 @@
+.view-wrapper
+  %h1 Edit
+  = form_for @user, :html => { :class => "form-horizontal" } do |f|
+    %fieldset
+      %legend General
+      .control-group.info
+        = f.label :firstname, nil, { :class => "control-label" }
+        .controls= f.text_field :firstname, :required => true
+      .control-group.info
+        = f.label :lastname, nil, { :class => "control-label" }
+        .controls= f.text_field :lastname, :required => true
+      .control-group
+        = f.label :start_work_date, nil, { :class => "control-label" }
+        .controls= f.date_select :start_work_date
+      .control-group
+        = f.label :address, nil, { :class => "control-label" }
+        .controls= f.text_area :address, :rows => 4
+      .control-group
+        = f.label :phone_mobile, nil, { :class => "control-label" }
+        .controls= f.text_field :phone_mobile, :rows => 4
+      .control-group
+        = f.label :id_no, nil, { :class => "control-label" }
+        .controls= f.text_field :id_no
+      .control-group
+        = f.label :education_level_id, nil, { :class => "control-label" }
+        .controls= f.select :education_level_id, []
+    %fieldset
+      %legend Permission
+      - Permission.all.each do |perm|
+        .control-group
+          .controls.pull-left
+            %input{ :type => "checkbox", :name => "user[permission_ids][]", :value => perm.id, :checked => !@user.permissions.where(:id => perm.id).blank?  }
+          = f.label perm.name, { :class => "control-label ltext", :style => "width: 250px; margin-left: 0.5em;" }
+    .form-actions
+      = f.submit nil, :disable_with => "loading ...", :class => "btn btn-primary" 
+      = link_to "Cancel", "/users" 

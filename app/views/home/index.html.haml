@@ -23,12 +23,12 @@
                 %td= t.workflow_state.to_s.humanize
                 %td= t.description
                 %td= Asset.find(t.asset_id).asset_no # TODO System Config
-                %td= User.find(t.assigned_by_id).fullname
-                %td= User.find(t.assigned_to_id).fullname
+                %td= (User.find(t.assigned_by_id).fullname rescue "")
+                %td= User.find(t.assigned_to_id).fullname rescue ""
                 %td= t.time_needed
                 / - if t.assigned_by_id == current_user.id
                 /   %td= link_to "Monitor"
-                - if t.assigned_to_id == current_user.id
+                - if t.assigned_to_id == current_user.id or current_user.role? :manager
                   %td= link_to "Take Action", edit_workorder_path(t, { :next_action => true } )
     - else
       %feldset

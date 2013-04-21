@@ -1,4 +1,10 @@
 class InvTypesController < ApplicationController
+
+  load_and_authorize_resource
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to :back, :alert => exception.message
+  end
+  
   # GET /inv_types
   # GET /inv_types.xml
   def index

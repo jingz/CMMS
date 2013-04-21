@@ -1,0 +1,21 @@
+:css
+  .rdatetime { width: 80px; }
+  .rdatetime:nth-child(2) { width: 135px; }
+  
+.view-wrapper
+  %h1 Workorder Flow 
+  = form_for @workorder, :html => { :class => "form-horizontal container-fluid", :multipart => true } do |f|
+    .row-fluid
+      = render "state_info", :f => f
+      .span9
+        = render "next_action", :f => f
+        .control-group
+          = f.label :assigned_to_id, nil, { :class => "control-label" }
+          .controls= f.select :assigned_to_id, User.all.map{|u| [u.fullname, u.id] } # TODO
+        .control-group
+          = f.label :time_needed, nil, { :class => "control-label" }
+          .controls= f.datetime_select :time_needed, {}, { :class => "rdatetime"}
+    .row-fluid
+      .form-actions
+        = f.submit "Submit Action", :disable_with => "loading ...", :class => "btn btn-primary" 
+        = link_to "Cancel", :back 

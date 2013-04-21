@@ -1,2 +1,30 @@
 .view-wrapper
-  %h1 Show
+	%fieldset
+		%legend User Info
+		%dl.dl-horizontal
+			%dt= I18n.t "user.firstname"
+			%dd= @user.firstname
+		%dl.dl-horizontal
+			%dt= I18n.t "user.lastname"
+			%dd= @user.lastname
+		%dl.dl-horizontal
+			%dt= I18n.t "user.id_no"
+			%dd= @user.id_no
+		%dl.dl-horizontal
+			%dt= I18n.t "user.address"
+			%dd= @user.address
+		%dl.dl-horizontal
+			%dt= I18n.t "user.phone_mobile"
+			%dd= @user.phone_mobile
+		%dl.dl-horizontal
+			%dt= I18n.t "user.start_work_date"
+			%dd= @user.start_work_date
+		%dl.dl-horizontal
+			%dt= I18n.t "user.education_level"
+			%dd= @user.education_level_id
+	%fieldset
+		%legend Permissions
+		%ul
+			- @user.permissions.each do |p|
+				%li
+					%span.label.label-success= p.name

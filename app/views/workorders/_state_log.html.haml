@@ -1,0 +1,22 @@
+%fieldset
+	%legend State Changed
+	- if wo.state_logs.count > 0
+		- wo.state_logs.reverse.each do |w|
+			%h5
+				%span= w.updated_at.to_formatted_s(:long)
+				%strong.muted Updated By:
+				%em= User.find(w.changed_by_id).fullname
+			%dd
+				%span.muted Update State:
+				%strong= w.from_wf_state
+				%span.muted ->
+				%i= w.to_wf_state
+			%dd
+				%span.muted Action:
+				%i= w.workflow_action
+			%dd
+				%span.muted Note:
+				%i= w.comment
+			%hr
+	- else
+		%h5.ctext.well Empty

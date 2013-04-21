@@ -21,8 +21,8 @@
           %td= a.category_val
           %td= a.description
           %td= a.stock_type_val
-          %td= a.qty_in_stock
-          %td= a.reorder_qty
+          %td.rtext= a.qty_in_stock.to_i
+          %td.rtext= a.reorder_qty.to_i
           %td
             = link_to "edit", edit_inventory_path(a)
             = link_to "show", inventory_path(a)

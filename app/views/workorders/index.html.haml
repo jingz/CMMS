@@ -7,40 +7,27 @@
         %th #
         %th Workorder No
         %th WO Type
-        %th Status
+        %th WF State
+        %th Priority
         %th Asset
         %th Description
         %th Asset Note
-        %th Priority
-        %th Resolution
-        %th Origin
-        %th Origin User
         %th Assigned To
-        %th Assigned By
-        %th Assigned Time
-        %th Time Needed
     %tbody
       - @workorders.each do |a|
         %tr
           %td= a.id
           %td= a.wo_no
           %td= a.wo_type_val
-          %td= a.status_val
+          %td= a.workflow_state
+          %td= a.priority_val
           %td= link_to Asset.find(a.asset_id).asset_no, asset_path(a.asset_id)
           %td= a.description
           %td= a.asset_note
-          %td= a.priority_val
-          %td= a.category_val
-          %td= a.resolution_val
-          %td= a.origin_id
-          %td= a.orig_user_id
-          %td= User.find(a.assigned_to_id).fullname
-          %td= User.find(a.assigned_by_id).fullname
-          %td= a.assigned_time
-          %td= a.time_needed
+          %td= (User.find(a.assigned_to_id).fullname rescue "")
           %td
-            = link_to "edit", edit_workorder_path(a)
-            = link_to "show", workorder_path(a)
+            = link_to "update", edit_workorder_path(a)
+            = "|"
             = link_to "delete", workorder_path(a), :method => :delete, 
                                                    :confirm => "Sure ?", 
                                                    :remote => true,

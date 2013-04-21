@@ -1,4 +1,37 @@
 # ecoding: utf-8
+Permission.destroy_all
+Permission.create!([
+  {
+    :name => "allow_importing_spare_part",
+    :description => "Allow Importing Spare Part",
+    :created_by => "Seed",
+    :updated_by => "Seed"
+  },
+  {
+    :name => "allow_withdraw_spare_part",
+    :description => "Allow Withdraw Spare Part",
+    :created_by => "Seed",
+    :updated_by => "Seed"
+  },
+  {
+    :name => "allow_work_request",
+    :description => "Allow Work Request",
+    :created_by => "Seed",
+    :updated_by => "Seed"
+  },
+  {
+    :name => "allow_work_update",
+    :description => "Allow Work Update",
+    :created_by => "Seed",
+    :updated_by => "Seed"
+  },
+  {
+    :name => "allow_manage_asset_and_inventory",
+    :description => "Allow Manage Asset And Inventory", 
+    :created_by => "Seed",
+    :updated_by => "Seed"
+  }
+])
 Role.destroy_all
 Role.create!([
   { :name => "manager" },

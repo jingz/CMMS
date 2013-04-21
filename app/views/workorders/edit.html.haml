@@ -1,4 +1,9 @@
 .view-wrapper
-  %h1 New Work Request
-  = render "form"
-  
+  %h1 Work Order Update
+  = render "info", :wo => @workorder
+  .row-fluid
+    .span6= render "state_log", :wo => @workorder
+    .span6= render "part_log", :wo => @workorder
+  - unless @workorder.complete?
+    .row-fluid
+      = render "update_form", :wo => @workorder

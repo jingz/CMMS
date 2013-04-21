@@ -11,7 +11,7 @@
       .control-group
         = f.label :priority_id, nil, { :class => "control-label" }
         .controls= f.select :priority_id, 
-          Workorder.get_map(:priority).map{|m| [m[:val].to_s.split("_").map(&:camelize).join(" "), m[:key]] },
+          workorder.get_map(:priority).map{|m| [m[:val].to_s.split("_").map(&:camelize).join(" "), m[:key]] },
           {}, { :disabled => "disabled" }
 
       .control-group
