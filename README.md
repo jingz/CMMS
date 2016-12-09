@@ -193,15 +193,39 @@ F. Inventory
    - Subsitiute
 
     ## Tables 
-    inventory : main properties
-    in_tran : inventory transaction
-    in_vendor : middle table of inventory-vendor
-    in_comment : inventory comment
-    in_type : type of inventory
-    in_doc : link to document
-    in_reserved : middle table of workorder-inventory
-    in_audit : middle table of users-inventory
-    in_location : location
-    in_trans_worksheet
-    in_stock : location and qty
+    - inventory : main properties
+    - in_tran : inventory transaction
+    - in_vendor : middle table of inventory-vendor
+    - in_comment : inventory comment
+    - in_type : type of inventory
+    - in_doc : link to document
+    - in_reserved : middle table of workorder-inventory
+    - in_audit : middle table of users-inventory
+    - in_location : location
+    - in_trans_worksheet
+    - in_stock : location and qty
 
+----------------------------------------------
+## Install and Basic Needs
+
+   Install rails guide here http://rubyonrails.org/download/
+   second clone my project,
+   config database connection at config/database.yml
+   then go into the root project directory and run
+   rake db:migrate # to initialize database schema
+   ruby db:seed # to initialize data
+   then run the server by
+   rails s
+   for flexible of used and modification. learn Rails http://rubyonrails.org/documentation/
+
+## Demo site
+      http://cmms.heroku.com/
+      for admin role
+      user: admin@email.com
+      pass: 123123
+      for manager role
+      user: manager@email.com
+      pass: 123123
+      for staff role
+      user: staff@email.com
+      pass: 123123
