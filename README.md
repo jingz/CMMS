@@ -229,3 +229,8 @@ F. Inventory
       for staff role
       user: staff@email.com
       pass: 123123
+
+
+** If you are a student looking for final project. This project could help you only database design task. You can use whatever web language you familiar.
+
+** If you are a big guy in a company looking for complete software this project is not ready to use. You should hire Rails developer to setup and extend more features.
