@@ -1,8 +1,7 @@
-CMMS - Computerized maintenance management system
----
+## CMMS - Computerized maintenance management system
 
-## CMMS modules Specs
-A. Equipment Management
+### CMMS Module Specifiation
+### A. Equipment Management
    - Equipment / Asset
      - Uniq ID
      - Procedures
@@ -34,20 +33,20 @@ A. Equipment Management
    - Safety Procedures
    - PM Schedules
 
-   ## Tables
-   asset : main properties
-   asset_type : type of asset
-   asset_contact : contact of asset incase there is any ploblem
-   asset_part : middle table of asset-inventory
-   asset_depreciation : depreciation of asset
-   asset_comment : kind of log
-   asset_downtime : downtime log
-   asset_meter : meter of asset use for pm trigger
-   asset_service_log : service log
+#### Tables
+- asset : main properties
+- asset_type : type of asset
+- asset_contact : contact of asset incase there is any ploblem
+- asset_part : middle table of asset-inventory
+- asset_depreciation : depreciation of asset
+- asset_comment : kind of log
+- asset_downtime : downtime log
+- asset_meter : meter of asset use for pm trigger
+- asset_service_log : service log
 
-   -----------------------------------------------------------------------
+-----
 
-B. Preventive Maintenance (PM)
+### B. Preventive Maintenance (PM)
    - Intro
      - Perfromed regularly based on Calendar Time or Run Time (see Equipment Management)
      - Generate WO
@@ -63,7 +62,7 @@ B. Preventive Maintenance (PM)
    - Outside Contrator
      - Able to contract to outside Vendor
    - Links as (Equipment Module)
-   - Functions*
+   - Functions
      - Generate WOs on its frequency setting
      - Route-based PM, a list of activities or inspections on a number of different equipment
        that are done by craft ppl
@@ -74,25 +73,25 @@ B. Preventive Maintenance (PM)
      - labor projection (Use to forcast labor by specificed period)
      - material projetion (Use to forcast material by specificed period)
 
-   ## Tables
-   - pm
-   - pm_step
-   - pm_dependency
-   - pm_comment
-   - pm_tool
-   - pm_audit
-   - pm_part
-   - pm_meter
-   - pm_safety
-   - pm_downtime
-   - pm_season
-   - pm_labor
-   - pm_asset
-   - pm_doc
+### Tables
+- pm
+- pm_step
+- pm_dependency
+- pm_comment
+- pm_tool
+- pm_audit
+- pm_part
+- pm_meter
+- pm_safety
+- pm_downtime
+- pm_season
+- pm_labor
+- pm_asset
+- pm_doc
 
-   -----------------------------------------------------------------------
+----
 
-C. Labor
+### C. Labor
    - Properties
      - Hourly Wage Rate, Accomodate Overtime
      - Categories
@@ -105,9 +104,9 @@ C. Labor
      - WOs, Hours by account number / employee ID / Calendar Period / Equipment
      - Productivity ( estimated and actual hours )
    
-   -----------------------------------------------------------------------
+---
 
-D. Work Order System (WO) ***
+### D. Work Order System (WO)
    - Intro
      - stores all preventive and corrective plan
      - emergency and scheduled
@@ -153,38 +152,37 @@ D. Work Order System (WO) ***
      - RIF - Relative Importance Factor = Priority X Equipment Criticality 
      - Plan and schedule WOs based on RIF
 
-   ## Tables ##
-   - workorder
-   - wo_step
-   - wo_labor
-   - wo_sched_labor
-   - wo_part
-   - wo_comment
-   - wo_semaphor
-   - wo_attachment
-   - wo_meter
-   - wo_tool
-   - wo_status_log
-   - wo_safety
-   - wo_doc
-   - wo_generation
+### Tables
+- workorder
+- wo_step
+- wo_labor
+- wo_sched_labor
+- wo_part
+- wo_comment
+- wo_semaphor
+- wo_attachment
+- wo_meter
+- wo_tool
+- wo_status_log
+- wo_safety
+- wo_doc
+- wo_generation
+- wo_planned_downtime
+- wo_planned_part
+- wo_planned_labor
+- wo_planned_tool
 
-   - wo_planned_downtime
-   - wo_planned_part
-   - wo_planned_labor
-   - wo_planned_tool
+---
 
-   ------------------------------------------------------------------------
-
-E. Vendor
+### E. Vendor
    - Report
      - Able to print Label
      - Contact Report
      - Cost Variance
    
-   ------------------------------------------------------------------------
+---
 
-F. Inventory
+### F. Inventory
    - User defined reorder points
    - Able to create POs to restock
    - Many model to calc ROP(reorder point) and EOQ(economic order quantity)
@@ -192,22 +190,24 @@ F. Inventory
    - Description
    - Subsitiute
 
-    ## Tables 
-    - inventory : main properties
-    - in_tran : inventory transaction
-    - in_vendor : middle table of inventory-vendor
-    - in_comment : inventory comment
-    - in_type : type of inventory
-    - in_doc : link to document
-    - in_reserved : middle table of workorder-inventory
-    - in_audit : middle table of users-inventory
-    - in_location : location
-    - in_trans_worksheet
-    - in_stock : location and qty
+### Tables 
+- inventory : main properties
+- in_tran : inventory transaction
+- in_vendor : middle table of inventory-vendor
+- in_comment : inventory comment
+- in_type : type of inventory
+- in_doc : link to document
+- in_reserved : middle table of workorder-inventory
+- in_audit : middle table of users-inventory
+- in_location : location
+- in_trans_worksheet
+- in_stock : location and qty
 
-----------------------------------------------
-## Install and Basic Needs
+---
 
+### Install and Basic Needs
+
+```bash
    Install rails guide here http://rubyonrails.org/download/
    second clone my project,
    config database connection at config/database.yml
@@ -217,24 +217,28 @@ F. Inventory
    then run the server by
    rails s
    for flexible of used and modification. learn Rails http://rubyonrails.org/documentation/
+```
 
-## Demo site
-      http://cmms.heroku.com/
-      for admin role
-      user: admin@email.com
-      pass: 123123
-      for manager role
-      user: manager@email.com
-      pass: 123123
-      for staff role
-      user: staff@email.com
-      pass: 123123
+### Demo site
 
+```
+http://cmms.heroku.com/
+for admin role
+user: admin@email.com
+pass: 123123
+for manager role
+user: manager@email.com
+pass: 123123
+for staff role
+user: staff@email.com
+pass: 123123
+```
 
-** If you are a student looking for final project. This project could help you only database design task. You can use whatever web language you familiar.
+----
 
-** If you are a big guy in a company looking for complete software this project is not ready to use. You should hire Rails developer to setup and extend more features.
+### Contact
 
----
+https://www.linkedin.com/in/sarunyoo-chobpanich-b36662107/
 
-Or Hire Me : https://www.linkedin.com/in/sarunyoo-chobpanich-b36662107/
+!! If you are a student looking for final project. This project could help you only database design task. You can use whatever web framework you familiar.
+!! If you are looking for complete software this project is not ready to use. You should hire Rails developer to setup and extend more features.
