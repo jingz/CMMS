@@ -240,5 +240,5 @@ pass: 123123
 
 https://www.linkedin.com/in/sarunyoo-chobpanich-b36662107/
 
-!! If you are a student looking for final project. This project could help you only database design task. You can use whatever web framework you familiar.
-!! If you are looking for complete software this project is not ready to use. You should hire Rails developer to setup and extend more features.
+- If you are a student looking for final project. This project could help you only database design task. You can use whatever web framework you familiar.
+- If you are looking for complete software this project is not ready to use. You should hire Rails developer to setup and extend more features.
