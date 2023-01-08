@@ -15,7 +15,7 @@
      - Warranty (able to show under warranty in WO)
      - Condition Monitoring
      - Reports
-       - Cost          
+       - Cost
        - Failure, Count
        - Hirarchy
        - Warranty
@@ -103,7 +103,7 @@
      - Vacation
      - WOs, Hours by account number / employee ID / Calendar Period / Equipment
      - Productivity ( estimated and actual hours )
-   
+
 ---
 
 ### D. Work Order System (WO)
@@ -148,8 +148,8 @@
      - Cost Variance
    - Planning / Scheduling
    - Backlog
-   - Priority System and Backlog 
-     - RIF - Relative Importance Factor = Priority X Equipment Criticality 
+   - Priority System and Backlog
+     - RIF - Relative Importance Factor = Priority X Equipment Criticality
      - Plan and schedule WOs based on RIF
 
 ### Tables
@@ -179,7 +179,7 @@
      - Able to print Label
      - Contact Report
      - Cost Variance
-   
+
 ---
 
 ### F. Inventory
@@ -190,7 +190,7 @@
    - Description
    - Subsitiute
 
-### Tables 
+### Tables
 - inventory : main properties
 - in_tran : inventory transaction
 - in_vendor : middle table of inventory-vendor
@@ -236,9 +236,8 @@ pass: 123123
 
 ----
 
-### Contact
+### Remark
 
-https://www.linkedin.com/in/sarunyoo-chobpanich-b36662107/
-
-- If you are a student looking for final project. This project could help you only database design task. You can use whatever web framework you familiar.
-- If you are looking for complete software this project is not ready to use. You should hire Rails developer to setup and extend more features.
+- This project is not ready to use and no more development activities
+- This project could assist you only database design part. Please see the model folder for the idea
+- You can use whatever web framework you familiar
