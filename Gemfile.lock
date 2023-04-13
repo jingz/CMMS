@@ -97,7 +97,7 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.35)
+    tzinfo (0.3.61)
     warden (1.2.1)
       rack (>= 1.0)
     will_paginate (3.0.4)
